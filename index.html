@@ -124,5 +124,17 @@ footer{text-align:center;padding:35px;color:#777}
   });
 })();
   </script>
+  <script>
+function searchAds() {
+  const input = document.getElementById("searchInput");
+  const cards = document.querySelectorAll(".ads .ad");
+  const query = input.value.trim().toLowerCase();
+
+  cards.forEach(function(card) {
+    const text = card.textContent.toLowerCase();
+    card.style.display = text.includes(query) ? "" : "none";
+  });
+}
+  </script>
 </body>
 </html>
