@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>آگهی‌لند | خرید و فروش آسان</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma,Arial;background:#f5f7f5;color:#222}
+header{background:#16854b;color:white;padding:22px;text-align:center}
+header h1{margin:0;font-size:30px}
+header p{margin:10px 0 0}
+nav{background:white;padding:15px;display:flex;justify-content:space-around;box-shadow:0 2px 8px #ddd}
+nav a{color:#16854b;text-decoration:none;font-weight:bold}
+main{padding:20px;max-width:1100px;margin:auto}
+.search{width:100%;padding:16px;border:1px solid #ddd;border-radius:12px;font-size:16px}
+.categories{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:25px 0}
+.category{background:white;padding:22px;text-align:center;border-radius:15px;box-shadow:0 3px 12px #ddd}
+.category span{font-size:32px;display:block;margin-bottom:10px}
+h2{font-size:22px}
+.ads{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:15px}
+.ad{background:white;border-radius:15px;overflow:hidden;box-shadow:0 3px 12px #ddd}
+.ad img{width:100%;height:180px;object-fit:cover}
+.ad-content{padding:15px}
+.price{color:#16854b;font-weight:bold}
+.add-btn{position:fixed;bottom:20px;left:20px;background:#16854b;color:white;padding:16px 25px;border-radius:40px;text-decoration:none;box-shadow:0 5px 20px #999}
+footer{text-align:center;padding:35px;color:#777}
+</style>
+</head>
+<body>
+
+<header>
+<h1>🛒 آگهی‌لند</h1>
+<p>هرچی داری بفروش، هرچی می‌خوای پیدا کن!</p>
+</header>
+
+<nav>
+<a href="#">خانه</a>
+<a href="#categories">دسته‌بندی‌ها</a>
+<a href="#ads">آگهی‌ها</a>
+</nav>
+
+<main>
+<input class="search" placeholder="🔍 دنبال چی می‌گردی؟">
+
+<h2 id="categories">دسته‌بندی‌ها</h2>
+<div class="categories">
+<div class="category"><span>🚗</span>خودرو</div>
+<div class="category"><span>🏠</span>املاک</div>
+<div class="category"><span>📱</span>موبایل</div>
+<div class="category"><span>🛋️</span>لوازم خانه</div>
+</div>
+
+<h2 id="ads">تازه‌ترین آگهی‌ها</h2>
+<div class="ads">
+<div class="ad">
+<div class="ad-content">
+<h3>پژو پارس مدل ۱۳۹۹</h3>
+<p class="price">۵۸۰ میلیون تومان</p>
+<p>📍 یزد</p>
+</div>
+</div>
+<div class="ad">
+<div class="ad-content">
+<h3>گوشی سامسونگ A54</h3>
+<p class="price">۱۵ میلیون تومان</p>
+<p>📍 یزد</p>
+</div>
+</div>
+</div>
+</main>
+
+<a class="add-btn" href="#">➕ ثبت آگهی</a>
+
+<footer>© 2026 آگهی‌لند</footer>
+</body>
+</html>
