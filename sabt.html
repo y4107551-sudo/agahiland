@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ثبت آگهی | آگهی‌لند</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f5f7f5;font-family:Tahoma,Arial;color:#222}
+header{background:#16854b;color:white;text-align:center;padding:25px}
+main{max-width:500px;margin:25px auto;padding:20px}
+form{background:white;padding:25px;border-radius:15px;box-shadow:0 3px 12px #ddd}
+label{display:block;margin:15px 0 7px;font-weight:bold}
+input,select,textarea{width:100%;padding:13px;border:1px solid #ddd;border-radius:9px;font:inherit}
+button{width:100%;background:#16854b;color:white;border:0;padding:15px;border-radius:10px;font:inherit;margin-top:20px}
+a{color:#16854b;text-decoration:none}
+</style>
+</head>
+<body>
+<header>
+<h1>➕ ثبت آگهی جدید</h1>
+<p>آگهی‌لند؛ خرید و فروش آسان</p>
+</header>
+<main>
+<a href="index.html">🏠 بازگشت به خانه</a>
+<form id="adForm">
+<label>عنوان آگهی</label>
+<input name="title" placeholder="مثلاً پژو پارس مدل ۱۳۹۹" required>
+
+<label>دسته‌بندی</label>
+<select name="category" required>
+<option value="">انتخاب کنید</option>
+<option>خودرو</option>
+<option>املاک</option>
+<option>موبایل</option>
+<option>لوازم خانه</option>
+</select>
+
+<label>قیمت (تومان)</label>
+<input name="price" type="number" min="0" required>
+
+<label>شهر</label>
+<input name="city" placeholder="مثلاً یزد" required>
+
+<label>توضیحات</label>
+<textarea name="description" rows="4" placeholder="توضیحات محصول"></textarea>
+
+<label>عکس محصول</label>
+<input name="photo" type="file" accept="image/*">
+
+<button type="submit">📢 ثبت آگهی</button>
+</form>
+</main>
+<script>
+document.getElementById("adForm").addEventListener("submit",function(e){
+e.preventDefault();
+alert("فرم آماده است! برای ثبت واقعی آگهی‌ها باید پایگاه داده متصل کنیم.");
+});
+</script>
+</body>
+</html>
