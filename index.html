@@ -56,7 +56,7 @@ footer{text-align:center;padding:35px;color:#777}
 <div class="ads">
 <div class="ad">
 <div class="ad-content">
-<h3>پژو پارس مدل ۱۳۹۹</h3>
+<h3>پژو <!DO مدل ۱۳۹۹</h3>
 <p class="price">۵۸۰ میلیون تومان</p>
 <p>📍 یزد</p>
 </div>
@@ -160,6 +160,49 @@ ads = activeAds;
     }
 
     card.appendChild(content);
+    const deleteButton = document.createElement("button");
+deleteButton.textContent = "🗑️ حذف آگهی";
+deleteButton.style.cssText =
+  "background:#dc3545;color:white;padding:10px;border:0;border-radius:8px;margin:10px;cursor:pointer;";
+
+deleteButton.onclick = function() {
+  if (!confirm("این آگهی به سطل زباله منتقل شود؟")) {
+    return;
+  }
+
+  let currentAds = JSON.parse(
+    localStorage.getItem("agahiland_ads") || "[]"
+  );
+
+  let trash = JSON.parse(
+    localStorage.getItem("agahiland_trash") || "[]"
+  );
+
+  const index = currentAds.findIndex(function(item) {
+    return String(item.id) === String(ad.id);
+  });
+
+  if (index !== -1) {
+    const removedAd = currentAds.splice(index, 1)[0];
+    removedAd.deletedAt = Date.now();
+    trash.push(removedAd);
+
+    localStorage.setItem(
+      "agahiland_ads",
+      JSON.stringify(currentAds)
+    );
+
+    localStorage.setItem(
+      "agahiland_trash",
+      JSON.stringify(trash)
+    );
+
+    card.remove();
+    alert("آگهی به سطل زباله منتقل شد ❤️");
+  }
+};
+
+card.appendChild(deleteButton);
     container.prepend(card);
   });
 })();
