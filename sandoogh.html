@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سطل زباله | آگهی‌لند</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Tahoma, Arial, sans-serif;
+    background: #f3f5f4;
+    color: #222;
+}
+
+header {
+    background: #159447;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0 0 10px;
+}
+
+header p {
+    margin: 0;
+}
+
+nav {
+    background: white;
+    padding: 15px;
+    text-align: center;
+}
+
+nav a {
+    color: #159447;
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: bold;
+}
+
+main {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 15px;
+}
+
+.notice {
+    background: #fff3cd;
+    padding: 15px;
+    border-radius: 10px;
+    line-height: 2;
+}
+
+.ad {
+    background: white;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px #ddd;
+}
+
+.ad img {
+    width: 100%;
+    max-width: 300px;
+    max-height: 220px;
+    object-fit: contain;
+    display: block;
+    margin-bottom: 12px;
+    border-radius: 8px;
+}
+
+.ad h3 {
+    color: #159447;
+}
+
+button {
+    border: none;
+    padding: 11px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 5px 3px;
+    font-family: inherit;
+}
+
+.restore {
+    background: #159447;
+    color: white;
+}
+
+.delete {
+    background: #dc3545;
+    color: white;
+}
+
+.empty {
+    background: white;
+    text-align: center;
+    padding: 30px;
+    border-radius: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🗑️ سطل زباله آگهی‌لند</h1>
+    <p>آگهی‌های حذف‌شده‌ات را مدیریت کن</p>
+</header>
+
+<nav>
+    <a href="index.html">🏠 صفحه اصلی</a>
+    <a href="sabt.html">➕ ثبت آگهی</a>
+</nav>
+
+<main>
+    <div class="notice">
+        ⚠️ آگهی‌های منتقل‌شده به سطل زباله را می‌توانی
+        برگردانی یا برای همیشه حذف کنی.
+    </div>
+
+    <div id="trashList"></div>
+</main>
+
+<script>
+function getTrash() {
+    try {
+        return JSON.parse(
+            localStorage.getItem("agahiland_trash") || "[]"
+        );
+    } catch (e) {
+        return [];
+    }
+}
+
+function showTrash() {
+    const list = document.getElementById("trashList");
+    const trash = getTrash();
+
+    list.innerHTML = "";
+
+    if (trash.length === 0) {
+        list.innerHTML =
+            '<div class="empty"><h3>🗑️ سطل زباله خالی است</h3>' +
+            '<p>هنوز آگهی‌ای به اینجا منتقل نشده است.</p></div>';
+        return;
+    }
+
+    trash.forEach(function(ad) {
+        const card = document.createElement("div");
+        card.className = "ad";
+
+        if (ad.photo) {
+            const img = document.createElement("img");
+            img.src = ad.photo;
+            img.alt = ad.title || "عکس آگهی";
+            card.appendChild(img);
+        }
+
+        const title = document.createElement("h3");
+        title.textContent = ad.title || "بدون عنوان";
+        card.appendChild(title);
+
+        const details = document.createElement("p");
+        details.textContent =
+            "دسته‌بندی: " + (ad.category || "نامشخص") +
+            " | قیمت: " + (ad.price || "توافقی") +
+            " | شهر: " + (ad.city || "نامشخص");
+        card.appendChild(details);
+
+        const description = document.createElement("p");
+        description.textContent = ad.description || "";
+        card.appendChild(description);
+
+        const restoreButton = document.createElement("button");
+        restoreButton.className = "restore";
+        restoreButton.textContent = "♻️ بازگرداندن آگهی";
+        restoreButton.onclick = function() {
+            restoreAd(ad.id);
+        };
+        card.appendChild(restoreButton);
+
+        const deleteButton = document.createElement("button");
+        deleteButton.className = "delete";
+        deleteButton.textContent = "❌ حذف برای همیشه";
+        deleteButton.onclick = function() {
+            deleteAd(ad.id);
+        };
+        card.appendChild(deleteButton);
+
+        list.appendChild(card);
+    });
+}
+
+function restoreAd(id) {
+    const trash = getTrash();
+    const ad = trash.find(function(item) {
+        return String(item.id) === String(id);
+    });
+
+    if (!ad) return;
+
+    let ads = [];
+
+    try {
+        ads = JSON.parse(
+            localStorage.getItem("agahiland_ads") || "[]"
+        );
+    } catch (e) {
+        ads = [];
+    }
+
+    ads.push(ad);
+
+    localStorage.setItem("agahiland_ads", JSON.stringify(ads));
+
+    const remaining = trash.filter(function(item) {
+        return String(item.id) !== String(id);
+    });
+
+    localStorage.setItem(
+        "agahiland_trash",
+        JSON.stringify(remaining)
+    );
+
+    alert("آگهی با موفقیت برگردانده شد ❤️");
+    showTrash();
+}
+
+function deleteAd(id) {
+    if (!confirm("این آگهی برای همیشه حذف شود؟")) return;
+
+    const remaining = getTrash().filter(function(item) {
+        return String(item.id) !== String(id);
+    });
+
+    localStorage.setItem(
+        "agahiland_trash",
+        JSON.stringify(remaining)
+    );
+
+    showTrash();
+}
+
+showTrash();
+</script>
+
+</body>
+  </html>
