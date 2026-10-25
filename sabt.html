@@ -52,10 +52,53 @@ a{color:#16854b;text-decoration:none}
 </form>
 </main>
 <script>
-document.getElementById("adForm").addEventListener("submit",function(e){
-e.preventDefault();
-alert("فرم آماده است! برای ثبت واقعی آگهی‌ها باید پایگاه داده متصل کنیم.");
+document.getElementById("adForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const form = e.target;
+  const file = form.photo.files[0];
+  let photo = "";
+
+  if (file) {
+    if (file.size > 1500000) {
+      alert("حجم عکس باید کمتر از ۱.۵ مگابایت باشد.");
+      return;
+    }
+
+    photo = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    }).catch(() => null);
+
+    if (!photo) {
+      alert("خواندن عکس ناموفق بود. دوباره امتحان کن.");
+      return;
+    }
+  }
+
+  const ad = {
+    id: Date.now(),
+    title: form.title.value.trim(),
+    category: form.category.value,
+    price: form.price.value,
+    city: form.city.value.trim(),
+    description: form.description.value.trim(),
+    photo: photo
+  };
+
+  try {
+    const ads = JSON.parse(localStorage.getItem("agahiland_ads") || "[]");
+    ads.unshift(ad);
+    localStorage.setItem("agahiland_ads", JSON.stringify(ads));
+
+    alert("آگهی در این مرورگر ذخیره شد!");
+    window.location.href = "index.html";
+  } catch (error) {
+    alert("ذخیره آگهی ناموفق بود. فضای ذخیره‌سازی مرورگر ممکن است پر باشد.");
+  }
 });
-</script>
+    </script>
 </body>
 </html>
