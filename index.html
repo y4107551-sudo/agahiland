@@ -84,7 +84,17 @@ footer{text-align:center;padding:35px;color:#777}
   } catch (e) {
     return;
   }
+const thirtyDays = 30 * 24 * 60 * 60 * 1000;
+const now = Date.now();
 
+ads = ads.filter(function(ad) {
+  const created = Number(ad.createdAt || ad.id);
+  return Number.isFinite(created) &&
+         created > 0 &&
+         now - created < thirtyDays;
+});
+
+localStorage.setItem("agahiland_ads", JSON.stringify(ads));
   ads.forEach(function (ad) {
     const card = document.createElement("div");
     card.className = "ad";
