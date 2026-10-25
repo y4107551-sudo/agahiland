@@ -80,6 +80,10 @@ document.getElementById("adForm").addEventListener("submit", async function(e) {
 
   const ad = {
     id: Date.now(),
+    const ad = {
+  id: Date.now(),
+  createdAt: Date.now(),
+  title: form.title.value.trim(),
     title: form.title.value.trim(),
     category: form.category.value,
     price: form.price.value,
