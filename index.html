@@ -73,5 +73,56 @@ footer{text-align:center;padding:35px;color:#777}
 <a class="add-btn" href="sabt.html">➕ ثبت آگهی</a>
 
 <footer>© 2026 آگهی‌لند</footer>
+  <script>
+(function () {
+  const container = document.querySelector(".ads");
+  if (!container) return;
+
+  let ads = [];
+  try {
+    ads = JSON.parse(localStorage.getItem("agahiland_ads") || "[]");
+  } catch (e) {
+    return;
+  }
+
+  ads.forEach(function (ad) {
+    const card = document.createElement("div");
+    card.className = "ad";
+
+    if (ad.photo) {
+      const img = document.createElement("img");
+      img.src = ad.photo;
+      img.alt = ad.title || "عکس آگهی";
+      card.appendChild(img);
+    }
+
+    const content = document.createElement("div");
+    content.className = "ad-content";
+
+    const title = document.createElement("h3");
+    title.textContent = ad.title || "";
+
+    const price = document.createElement("p");
+    price.className = "price";
+    price.textContent = ad.price
+      ? Number(ad.price).toLocaleString("fa-IR") + " تومان"
+      : "توافقی";
+
+    const city = document.createElement("p");
+    city.textContent = "📍 " + (ad.city || "");
+
+    content.append(title, price, city);
+
+    if (ad.description) {
+      const desc = document.createElement("p");
+      desc.textContent = ad.description;
+      content.appendChild(desc);
+    }
+
+    card.appendChild(content);
+    container.prepend(card);
+  });
+})();
+  </script>
 </body>
 </html>
