@@ -160,6 +160,40 @@ ads = activeAds;
     }
 
     card.appendChild(content);
+    const deleteButton = document.createElement("button");
+deleteButton.textContent = "🗑️ حذف آگهی";
+deleteButton.style.cssText =
+  "background:red;color:white;padding:10px;border:0;border-radius:8px;margin:10px;";
+
+deleteButton.onclick = function() {
+  if (!confirm("آگهی به سطل زباله منتقل شود؟")) return;
+
+  let currentAds = JSON.parse(
+    localStorage.getItem("agahiland_ads") || "[]"
+  );
+
+  let trash = JSON.parse(
+    localStorage.getItem("agahiland_trash") || "[]"
+  );
+
+  const index = currentAds.findIndex(function(item) {
+    return String(item.id) === String(ad.id);
+  });
+
+  if (index === -1) return;
+
+  const removedAd = currentAds.splice(index, 1)[0];
+  removedAd.deletedAt = Date.now();
+  trash.push(removedAd);
+
+  localStorage.setItem("agahiland_ads", JSON.stringify(currentAds));
+  localStorage.setItem("agahiland_trash", JSON.stringify(trash));
+
+  card.remove();
+  alert("آگهی به سطل زباله منتقل شد");
+};
+
+card.appendChild(deleteButton);
     container.prepend(card);
   });
 })();
