@@ -3,79 +3,89 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ورود و ثبت‌نام | آگهی‌لند</title>
+<title>ورود با موبایل | آگهی‌لند</title>
 <style>
-body{font-family:Tahoma,sans-serif;background:#f2f5f3;margin:0;padding:20px;color:#222}
-.box{max-width:400px;margin:35px auto;background:#fff;padding:24px;border-radius:16px;box-shadow:0 4px 18px #0001}
-h2{text-align:center;color:#16854b}
-p{text-align:center}
-input,button{box-sizing:border-box;width:100%;padding:13px;margin:9px 0;border-radius:9px;font-size:16px}
-input{border:1px solid #ccc}
-button{border:0;background:#16854b;color:#fff;font-weight:bold;cursor:pointer}
-.switch{background:#e8f5ec;color:#16854b}
-#msg{line-height:1.9;overflow-wrap:anywhere}
-a{color:#16854b}
+body {
+  font-family: Tahoma, sans-serif;
+  background: #f2f5f3;
+  padding: 20px;
+}
+.box {
+  max-width: 400px;
+  margin: 50px auto;
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  text-align: center;
+}
+h2 { color: #16854b; }
+input, button {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 14px;
+  margin: 10px 0;
+  border-radius: 9px;
+  font-size: 16px;
+}
+input { border: 1px solid #ccc; }
+button {
+  background: #16854b;
+  color: white;
+  border: none;
+}
+#codeBox { display: none; }
+#message { color: #b45309; }
 </style>
 </head>
 <body>
+
 <div class="box">
 <h2>🌿 آگهی‌لند</h2>
-<p>برای ثبت آگهی، ابتدا وارد حساب خود شوید.</p>
+<p>ورود با شماره موبایل</p>
 
-<input id="email" type="email" placeholder="ایمیل" autocomplete="email">
-<input id="password" type="password" placeholder="رمز عبور (حداقل ۶ حرف)" autocomplete="current-password">
-
-<button id="login">ورود</button>
-<button id="signup" class="switch">ثبت‌نام</button>
-<p id="msg"></p>
-<p><a href="index.html">بازگشت به صفحه اصلی</a></p>
+<div id="phoneBox">
+<input id="phone" type="tel"
+placeholder="شماره موبایل: 09130000000">
+<button onclick="sendCode()">دریافت کد تأیید</button>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<div id="codeBox">
+<p>کد آزمایشی: 123456</p>
+<input id="code" type="text"
+placeholder="کد تأیید ۶ رقمی">
+<button onclick="verifyCode()">تأیید کد</button>
+</div>
+
+<p id="message"></p>
+<a href="index.html">بازگشت به صفحه اصلی</a>
+</div>
+
 <script>
-const SUPABASE_URL = "https://arhvbyjfgltqwzetorua.supabase.co";
-const SUPABASE_KEY = "sb_publishable_ovWzrF7QyLD7YZnT1B4OHg_JxaBNNMP";
-const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-const msg = document.getElementById("msg");
+function sendCode() {
+  const phone = document.getElementById("phone").value.trim();
 
-document.getElementById("signup").onclick = async () => {
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
-  if (!email || password.length < 6) {
-    msg.textContent = "ایمیل را وارد کن و رمز عبور حداقل ۶ حرفی بگذار.";
+  if (!/^09\d{9}$/.test(phone)) {
+    alert("شماره موبایل معتبر وارد کن");
     return;
   }
-  msg.textContent = "در حال ثبت‌نام...";
-  const {data, error} = await client.auth.signUp({
-    email, password,
-    options: { emailRedirectTo: location.origin + location.pathname }
-  });
-  if (error) {
-    msg.textContent = "خطا: " + error.message;
-  } else if (data.session) {
-    msg.textContent = "ثبت‌نام موفق بود؛ در حال ورود...";
-    location.href = "index.html";
-  } else {
-    msg.textContent = "ثبت‌نام انجام شد. ایمیلت را بررسی و لینک تأیید را باز کن؛ سپس وارد شو.";
-  }
-};
 
-document.getElementById("login").onclick = async () => {
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
-  if (!email || !password) {
-    msg.textContent = "ایمیل و رمز عبور را وارد کن.";
-    return;
-  }
-  msg.textContent = "در حال ورود...";
-  const {error} = await client.auth.signInWithPassword({email, password});
-  if (error) {
-    msg.textContent = "خطا: " + error.message;
+  document.getElementById("phoneBox").style.display = "none";
+  document.getElementById("codeBox").style.display = "block";
+  document.getElementById("message").textContent =
+    "حالت آزمایشی است؛ پیامک واقعی ارسال نمی‌شود.";
+}
+
+function verifyCode() {
+  const code = document.getElementById("code").value.trim();
+
+  if (code === "123456") {
+    document.getElementById("message").textContent =
+      "کد آزمایشی پذیرفته شد. این ورود واقعی نیست.";
   } else {
-    msg.textContent = "ورود موفق بود!";
-    location.href = "index.html";
+    alert("کد اشتباه است");
   }
-};
+}
 </script>
+
 </body>
 </html>
