@@ -2,292 +2,426 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>آگهی‌لند | خرید و فروش آسان</title>
 <meta name="theme-color" content="#ffffff">
-<link rel="icon" type="image/png" href="agahiland-icon.png">
-<link rel="apple-touch-icon" href="agahiland-icon.png">
+<meta name="description" content="آگهی‌لند؛ خرید و فروش آسان کالا و خدمات">
+
+<link rel="icon" type="image/png" href="agahiland-icon-1.png">
+<link rel="apple-touch-icon" href="agahiland-icon-1.png">
 
 <style>
-:root{
-  --red:#df2142;
-  --dark:#24242b;
-  --gray:#85858e;
-  --bg:#f6f6f8;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--dark);
-  font-family:Tahoma,Arial,sans-serif;
-  font-size:14px;
-}
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
-a{text-decoration:none;color:inherit}
-
-.top{
-  position:sticky;
-  top:0;
-  z-index:10;
-  background:white;
-  border-bottom:1px solid #eee;
-  padding:14px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-.brand{font-size:27px;font-weight:900}
-.red{color:var(--red)}
-.bell{border:0;background:white;font-size:24px}
-
-.page{
-  display:none;
-  max-width:760px;
-  margin:auto;
-  padding:14px 13px 100px;
-}
-.page.active{display:block}
-
-.search{
-  background:#f0f0f3;
-  border-radius:12px;
-  padding:12px;
-  margin-bottom:15px;
-  display:flex;
-  gap:8px;
-}
-.search input{
-  width:100%;
-  border:0;
-  outline:none;
-  background:transparent;
+:root {
+  --red: #df2142;
+  --dark: #24242b;
+  --gray: #85858e;
+  --bg: #f6f6f8;
 }
 
-.hero{
-  position:relative;
-  height:170px;
-  border-radius:16px;
-  overflow:hidden;
-  margin-bottom:22px;
-  background:#e8d5d8;
-}
-.hero img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  
-  filter:brightness(1.25) contrast(1.15) saturate(1.4);
-    }
-}
-.hero-overlay{
-  position:absolute;
-  inset:0;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  padding:20px;
-  color:white;
-  background:linear-gradient(90deg,transparent,#0006);
-  text-shadow:0 2px 5px #0008;
-}
-.hero-overlay strong{font-size:25px}
-.hero-overlay p{font-size:14px}
-
-.section-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:22px 0 12px;
-}
-h2{font-size:18px;margin:0}
-.small-link{color:var(--red);font-size:12px}
-
-.cat-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:9px;
-}
-.cat{
-  background:white;
-  border:1px solid #eee;
-  border-radius:12px;
-  padding:14px 3px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:9px;
-  min-height:85px;
-}
-.cat .emoji{font-size:25px}
-.cat span:last-child{font-size:11px}
-
-.ad-grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:12px;
-}
-.ad-card{
-  background:white;
-  border:1px solid #eee;
-  border-radius:13px;
-  overflow:hidden;
-  position:relative;
-}
-.ad-photo{
-  height:140px;
-  background:#eee;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:45px;
-}
-.ad-photo img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-.ad-info{padding:12px}
-.ad-title{font-weight:bold;font-size:13px}
-.ad-price{
-  color:var(--red);
-  font-weight:bold;
-  margin:10px 0;
-}
-.ad-city{color:#888;font-size:11px}
-.heart{
-  position:absolute;
-  top:8px;
-  left:8px;
-  border:0;
-  background:white;
-  border-radius:50%;
-  width:30px;
-  height:30px;
-  font-size:17px;
+* {
+  box-sizing: border-box;
 }
 
-.bottom-nav{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  z-index:20;
-  background:white;
-  border-top:1px solid #eee;
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-  padding:9px 3px;
-}
-.nav-item{
-  background:transparent;
-  border:0;
-  color:#777;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:5px;
-  font-size:10px;
-}
-.nav-item .ico{font-size:22px}
-.nav-item.active{color:var(--red)}
-.nav-item.add{margin-top:-25px}
-.nav-item.add .ico{
-  background:var(--red);
-  color:white;
-  width:46px;
-  height:46px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  font-size:30px;
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--dark);
+  font-family: Tahoma, Arial, sans-serif;
+  font-size: 14px;
 }
 
-.form-card,.profile-card,.message-row{
-  background:white;
-  border:1px solid #eee;
-  border-radius:12px;
-  padding:15px;
-  margin:12px 0;
+button, input, select, textarea {
+  font: inherit;
 }
-.field{
-  width:100%;
-  display:block;
-  padding:12px;
-  margin:8px 0 15px;
-  border:1px solid #ddd;
-  border-radius:9px;
+
+button {
+  cursor: pointer;
 }
-label{font-size:12px;font-weight:bold}
-.primary{
-  background:var(--red);
-  color:white;
-  border:0;
-  padding:14px;
-  border-radius:10px;
-  width:100%;
-  font-weight:bold;
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
-.back{
-  background:none;
-  border:0;
-  padding:10px 0;
+
+/* بالای سایت */
+
+.top {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  background: white;
+  border-bottom: 1px solid #eee;
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  min-height: 70px;
 }
-.empty{
-  text-align:center;
-  color:#888;
-  display:none;
-  padding:20px;
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  white-space: nowrap;
+  text-decoration: none;
 }
-.detail-photo{
-  height:240px;
-  background:#eee;
-  border-radius:12px;
-  display:grid;
-  place-items:center;
-  font-size:70px;
-  overflow:hidden;
+
+.brand img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  flex-shrink: 0;
 }
-.detail-photo img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+
+.brand-name {
+  font-size: 25px;
+  font-weight: 900;
+  white-space: nowrap;
 }
-@media(min-width:600px){
-  .ad-photo{height:190px}
-  .hero{height:230px}
+
+.red {
+  color: var(--red);
+}
+
+.bell {
+  border: 0;
+  background: transparent;
+  font-size: 24px;
+  padding: 8px;
+  flex-shrink: 0;
+}
+
+/* صفحات */
+
+.page {
+  display: none;
+  max-width: 760px;
+  margin: auto;
+  padding: 14px 13px 100px;
+}
+
+.page.active {
+  display: block;
+}
+
+/* جست‌وجو */
+
+.search {
+  background: #f0f0f3;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.search input {
+  width: 100%;
+  border: 0;
+  outline: none;
+  background: transparent;
+}
+
+/* بنر */
+
+.hero {
+  position: relative;
+  height: 170px;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 22px;
+  background: #e8d5d8;
+}
+
+.hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(1.25) contrast(1.15) saturate(1.4);
+}
+
+/* عنوان بخش‌ها */
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 22px 0 12px;
+}
+
+h2 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.small-link {
+  color: var(--red);
+  font-size: 12px;
+}
+
+/* دسته‌بندی‌ها */
+
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 9px;
+}
+
+.cat {
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 14px 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 85px;
+}
+
+.cat .emoji {
+  font-size: 25px;
+}
+
+.cat span:last-child {
+  font-size: 11px;
+}
+
+/* آگهی‌ها */
+
+.ad-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.ad-card {
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 13px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+.ad-photo {
+  height: 140px;
+  background: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 45px;
+}
+
+.ad-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ad-info {
+  padding: 12px;
+}
+
+.ad-title {
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.ad-price {
+  color: var(--red);
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.ad-city {
+  color: #888;
+  font-size: 11px;
+}
+
+/* منوی پایین */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  background: white;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 9px 3px;
+}
+
+.nav-item {
+  background: transparent;
+  border: 0;
+  color: #777;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+}
+
+.nav-item .ico {
+  font-size: 22px;
+}
+
+.nav-item.active {
+  color: var(--red);
+}
+
+.nav-item.add {
+  margin-top: -25px;
+}
+
+.nav-item.add .ico {
+  background: var(--red);
+  color: white;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 30px;
+}
+
+/* فرم‌ها */
+
+.form-card,
+.profile-card,
+.message-row {
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 15px;
+  margin: 12px 0;
+}
+
+.field {
+  width: 100%;
+  display: block;
+  padding: 12px;
+  margin: 8px 0 15px;
+  border: 1px solid #ddd;
+  border-radius: 9px;
+}
+
+label {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.primary {
+  background: var(--red);
+  color: white;
+  border: 0;
+  padding: 14px;
+  border-radius: 10px;
+  width: 100%;
+  font-weight: bold;
+}
+
+.back {
+  background: none;
+  border: 0;
+  padding: 10px 0;
+}
+
+.empty {
+  text-align: center;
+  color: #888;
+  display: none;
+  padding: 20px;
+}
+
+.detail-photo {
+  height: 240px;
+  background: #eee;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 70px;
+  overflow: hidden;
+}
+
+.detail-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (min-width: 600px) {
+  .ad-photo {
+    height: 190px;
+  }
+
+  .hero {
+    height: 230px;
+  }
+}
+
+@media (max-width: 350px) {
+  .brand-name {
+    font-size: 21px;
+  }
+
+  .brand img {
+    width: 42px;
+    height: 42px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<a href="#" class="brand" onclick="showPage('home');return false"
-   style="display:flex;align-items:center;gap:10px;text-decoration:none;">
-  <img src="agahiland-icon-1.png" alt="لوگوی آگهی‌لند"
-       style="width:55px;height:55px;object-fit:contain;">
-  <span style="color:white;font-size:25px;font-weight:900;">
-    آگهی‌لند
-  </span>
-</a>
-  <a href="#" class="brand" oncl
-  <button class="bell" onclick="showPage('messages')">🔔</button>
+<!-- هدر اصلی -->
+
+<header class="top">
+
+  <a href="#" class="brand"
+     onclick="showPage('home');return false">
+
+    <img
+      src="agahiland-icon-1.png"
+      alt="لوگوی آگهی‌لند">
+
+    <span class="brand-name">
+      <span class="red">آگهی</span>‌لند
+    </span>
+
+  </a>
+
+  <button class="bell"
+    onclick="showPage('messages')">🔔</button>
+
 </header>
+
+<!-- صفحه اصلی -->
 
 <section id="home" class="page active">
 
   <div class="search">
     🔍
-    <input id="searchInput"
+    <input
+      id="searchInput"
       placeholder="جست‌وجو در آگهی‌ها..."
       oninput="renderAds()">
   </div>
 
   <div class="hero">
-    <img src="agahiland-banner-3.jpg" alt="آسمان و طبیعت">
-
+    <img
+      src="agahiland-banner-3.jpg"
+      alt="بنر آگهی‌لند">
   </div>
 
   <div class="section-head">
@@ -299,53 +433,138 @@ label{font-size:12px;font-weight:bold}
   </div>
 
   <div class="cat-grid">
-    <button class="cat" onclick="filterCategory('خودرو')"><span class="emoji">🚘</span><span>خودرو</span></button>
-    <button class="cat" onclick="filterCategory('املاک')"><span class="emoji">🏠</span><span>املاک</span></button>
-    <button class="cat" onclick="filterCategory('موبایل')"><span class="emoji">📱</span><span>موبایل</span></button>
-    <button class="cat" onclick="filterCategory('خانه')"><span class="emoji">🛋️</span><span>لوازم خانه</span></button>
-    <button class="cat" onclick="filterCategory('پوشاک')"><span class="emoji">👕</span><span>پوشاک</span></button>
-    <button class="cat" onclick="filterCategory('کار')"><span class="emoji">💼</span><span>استخدام</span></button>
-    <button class="cat" onclick="filterCategory('خدمات')"><span class="emoji">🔧</span><span>خدمات</span></button>
-    <button class="cat" onclick="showPage('categories')"><span class="emoji">•••</span><span>سایر</span></button>
+
+    <button class="cat" onclick="filterCategory('خودرو')">
+      <span class="emoji">🚘</span>
+      <span>خودرو</span>
+    </button>
+
+    <button class="cat" onclick="filterCategory('املاک')">
+      <span class="emoji">🏠</span>
+      <span>املاک</span>
+    </button>
+
+    <button class="cat" onclick="filterCategory('موبایل')">
+      <span class="emoji">📱</span>
+      <span>موبایل</span>
+    </button>
+
+    <button class="cat" onclick="filterCategory('خانه')">
+      <span class="emoji">🛋️</span>
+      <span>لوازم خانه</span>
+    </button>
+
+    <button class="cat" onclick="filterCategory('پوشاک')">
+      <span class="emoji">👕</span>
+      <span>پوشاک</span>
+    </button>
+
+    <button class="cat" onclick="filterCategory('کار')">
+      <span class="emoji">💼</span>
+      <span>استخدام</span>
+    </button>
+
+    <button class="cat" onclick="filterCategory('خدمات')">
+      <span class="emoji">🔧</span>
+      <span>خدمات</span>
+    </button>
+
+    <button class="cat" onclick="showPage('categories')">
+      <span class="emoji">•••</span>
+      <span>سایر</span>
+    </button>
+
   </div>
 
   <div class="section-head">
     <h2 id="adsHeading">آگهی‌های ویژه</h2>
-    <a href="#" class="small-link" onclick="showPage('categories');return false">مشاهده همه</a>
+    <a href="#" class="small-link"
+       onclick="showPage('categories');return false">
+      مشاهده همه
+    </a>
   </div>
 
   <div class="ad-grid" id="adGrid"></div>
-  <p class="empty" id="emptyMsg">آگهی‌ای پیدا نشد.</p>
+
+  <p class="empty" id="emptyMsg">
+    آگهی‌ای پیدا نشد.
+  </p>
 
 </section>
+
+<!-- دسته‌بندی‌ها -->
 
 <section id="categories" class="page">
-  <button class="back" onclick="showPage('home')">→ بازگشت</button>
+
+  <button class="back" onclick="showPage('home')">
+    → بازگشت
+  </button>
+
   <h2>دسته‌بندی‌ها</h2>
+
   <div class="cat-grid" style="margin-top:15px">
-    <button class="cat" onclick="filterCategory('خودرو')">🚘 خودرو</button>
-    <button class="cat" onclick="filterCategory('املاک')">🏠 املاک</button>
-    <button class="cat" onclick="filterCategory('موبایل')">📱 موبایل</button>
-    <button class="cat" onclick="filterCategory('خانه')">🛋️ خانه</button>
-    <button class="cat" onclick="filterCategory('پوشاک')">👕 پوشاک</button>
-    <button class="cat" onclick="filterCategory('کار')">💼 استخدام</button>
-    <button class="cat" onclick="filterCategory('خدمات')">🔧 خدمات</button>
-    <button class="cat" onclick="filterCategory('ورزش')">🏀 ورزش</button>
+
+    <button class="cat" onclick="filterCategory('خودرو')">
+      🚘 خودرو
+    </button>
+
+    <button class="cat" onclick="filterCategory('املاک')">
+      🏠 املاک
+    </button>
+
+    <button class="cat" onclick="filterCategory('موبایل')">
+      📱 موبایل
+    </button>
+
+    <button class="cat" onclick="filterCategory('خانه')">
+      🛋️ خانه
+    </button>
+
+    <button class="cat" onclick="filterCategory('پوشاک')">
+      👕 پوشاک
+    </button>
+
+    <button class="cat" onclick="filterCategory('کار')">
+      💼 استخدام
+    </button>
+
+    <button class="cat" onclick="filterCategory('خدمات')">
+      🔧 خدمات
+    </button>
+
+    <button class="cat" onclick="filterCategory('ورزش')">
+      🏀 ورزش
+    </button>
+
   </div>
+
 </section>
 
+<!-- ثبت آگهی -->
+
 <section id="post" class="page">
-  <button class="back" onclick="showPage('home')">→ بازگشت</button>
+
+  <button class="back" onclick="showPage('home')">
+    → بازگشت
+  </button>
+
   <h2>ثبت آگهی</h2>
+
   <p style="color:#777;font-size:12px;line-height:2">
     در این نسخه آزمایشی، آگهی فقط در مرورگر خودت ذخیره می‌شود.
   </p>
 
   <form class="form-card" id="postForm">
+
     <label>عنوان آگهی</label>
-    <input class="field" id="postTitle" required placeholder="مثلاً فروش گوشی سامسونگ">
+    <input
+      class="field"
+      id="postTitle"
+      required
+      placeholder="مثلاً فروش گوشی سامسونگ">
 
     <label>دسته‌بندی</label>
+
     <select class="field" id="postCategory">
       <option>خودرو</option>
       <option>املاک</option>
@@ -359,239 +578,433 @@ label{font-size:12px;font-weight:bold}
     </select>
 
     <label>قیمت (تومان)</label>
-    <input class="field" id="postPrice" inputmode="numeric">
+    <input
+      class="field"
+      id="postPrice"
+      inputmode="numeric">
 
     <label>شهر</label>
-    <input class="field" id="postCity" required>
+    <input
+      class="field"
+      id="postCity"
+      required>
 
     <label>توضیحات</label>
-    <textarea class="field" id="postDescription" rows="4"></textarea>
+    <textarea
+      class="field"
+      id="postDescription"
+      rows="4"></textarea>
 
     <label>عکس آگهی</label>
-    <input class="field" id="postPhoto" type="file" accept="image/*">
+    <input
+      class="field"
+      id="postPhoto"
+      type="file"
+      accept="image/*">
 
-    <button class="primary" type="submit">ثبت آگهی</button>
+    <button class="primary" type="submit">
+      ثبت آگهی
+    </button>
+
   </form>
+
 </section>
 
+<!-- پیام‌ها -->
+
 <section id="messages" class="page">
+
   <h2>پیام‌ها و اعلان‌ها</h2>
+
   <div class="message-row">
     🔔 به آگهی‌لند خوش آمدی!
     <p>پیام‌رسانی واقعی هنوز فعال نیست.</p>
   </div>
+
 </section>
 
+<!-- حساب کاربری -->
+
 <section id="account" class="page">
+
   <h2>حساب کاربری</h2>
+
   <div class="profile-card">
     👤 کاربر آگهی‌لند
     <p>حساب آزمایشی</p>
   </div>
-  <a href="sandoogh.html">🗑️ سطل زباله</a>
+
+  <a href="sandoogh.html">
+    🗑️ سطل زباله
+  </a>
+
 </section>
+
+<!-- جزئیات آگهی -->
 
 <section id="detail" class="page">
-  <button class="back" onclick="showPage('home')">→ بازگشت</button>
+
+  <button class="back" onclick="showPage('home')">
+    → بازگشت
+  </button>
+
   <div id="detailContent"></div>
+
 </section>
 
+<!-- منوی پایین -->
+
 <nav class="bottom-nav">
-  <button class="nav-item active" data-page="home" onclick="showPage('home')">
-    <span class="ico">⌂</span>خانه
+
+  <button class="nav-item active"
+    data-page="home"
+    onclick="showPage('home')">
+
+    <span class="ico">⌂</span>
+    خانه
   </button>
-  <button class="nav-item" data-page="categories" onclick="showPage('categories')">
-    <span class="ico">▦</span>دسته‌بندی‌ها
+
+  <button class="nav-item"
+    data-page="categories"
+    onclick="showPage('categories')">
+
+    <span class="ico">▦</span>
+    دسته‌بندی‌ها
   </button>
-  <button class="nav-item add" data-page="post" onclick="showPage('post')">
-    <span class="ico">+</span>ثبت آگهی
+
+  <button class="nav-item add"
+    data-page="post"
+    onclick="showPage('post')">
+
+    <span class="ico">+</span>
+    ثبت آگهی
   </button>
-  <button class="nav-item" data-page="messages" onclick="showPage('messages')">
-    <span class="ico">☏</span>پیام‌ها
+
+  <button class="nav-item"
+    data-page="messages"
+    onclick="showPage('messages')">
+
+    <span class="ico">☏</span>
+    پیام‌ها
   </button>
-  <button class="nav-item" data-page="account" onclick="showPage('account')">
-    <span class="ico">♙</span>حساب من
+
+  <button class="nav-item"
+    data-page="account"
+    onclick="showPage('account')">
+
+    <span class="ico">♙</span>
+    حساب من
   </button>
+
 </nav>
 
 <script>
-const sampleAds=[
-  {id:'sample1',title:'پژو پارس مدل ۱۳۹۹',price:'580000000',city:'یزد',category:'خودرو',symbol:'🚘'},
-  {id:'sample2',title:'خانه ویلایی با حیاط',price:'4500000000',city:'یزد',category:'املاک',symbol:'🏠'},
-  {id:'sample3',title:'گوشی سامسونگ A54',price:'15000000',city:'یزد',category:'موبایل',symbol:'📱'},
-  {id:'sample4',title:'مبل راحتی ۷ نفره',price:'12000000',city:'تهران',category:'خانه',symbol:'🛋️'}
+
+/* آگهی‌های نمونه */
+
+const sampleAds = [
+  {
+    id: 'sample1',
+    title: 'پژو پارس مدل ۱۳۹۹',
+    price: '580000000',
+    city: 'یزد',
+    category: 'خودرو',
+    symbol: '🚘'
+  },
+  {
+    id: 'sample2',
+    title: 'خانه ویلایی با حیاط',
+    price: '4500000000',
+    city: 'یزد',
+    category: 'املاک',
+    symbol: '🏠'
+  },
+  {
+    id: 'sample3',
+    title: 'گوشی سامسونگ A54',
+    price: '15000000',
+    city: 'یزد',
+    category: 'موبایل',
+    symbol: '📱'
+  },
+  {
+    id: 'sample4',
+    title: 'مبل راحتی ۷ نفره',
+    price: '12000000',
+    city: 'تهران',
+    category: 'خانه',
+    symbol: '🛋️'
+  }
 ];
 
-let categoryFilter='';
+let categoryFilter = '';
 
-function getAds(){
-  try{
-    return JSON.parse(localStorage.getItem('agahiland_ads')||'[]');
-  }catch(e){
+/* دریافت آگهی‌های ذخیره‌شده */
+
+function getAds() {
+  try {
+    return JSON.parse(
+      localStorage.getItem('agahiland_ads') || '[]'
+    );
+  } catch (e) {
     return [];
   }
 }
 
-function money(value){
-  let n=Number(String(value||'').replace(/[^\d]/g,''));
-  return n?n.toLocaleString('fa-IR')+' تومان':'توافقی';
+/* نمایش قیمت */
+
+function money(value) {
+  let n = Number(
+    String(value || '').replace(/[^\d]/g, '')
+  );
+
+  return n
+    ? n.toLocaleString('fa-IR') + ' تومان'
+    : 'توافقی';
 }
 
-function showPage(id){
-  document.querySelectorAll('.page').forEach(p=>{
-    p.classList.toggle('active',p.id===id);
+/* تغییر صفحه */
+
+function showPage(id) {
+
+  document.querySelectorAll('.page').forEach(p => {
+    p.classList.toggle('active', p.id === id);
   });
-  document.querySelectorAll('.nav-item').forEach(b=>{
-    b.classList.toggle('active',b.dataset.page===id);
+
+  document.querySelectorAll('.nav-item').forEach(b => {
+    b.classList.toggle(
+      'active',
+      b.dataset.page === id
+    );
   });
-  window.scrollTo(0,0);
+
+  window.scrollTo(0, 0);
 }
 
-function allAds(){
+/* تمام آگهی‌ها */
+
+function allAds() {
   return sampleAds.concat(getAds());
 }
 
-function renderAds(){
-  const grid=document.getElementById('adGrid');
-  const query=document.getElementById('searchInput').value.trim().toLowerCase();
+/* نمایش آگهی‌ها */
 
-  const ads=allAds().filter(a=>{
-    const matchCategory=!categoryFilter||a.category===categoryFilter;
-    const matchSearch=(a.title+' '+a.city+' '+a.category).toLowerCase().includes(query);
-    return matchCategory&&matchSearch;
+function renderAds() {
+
+  const grid = document.getElementById('adGrid');
+
+  const query = document
+    .getElementById('searchInput')
+    .value.trim()
+    .toLowerCase();
+
+  const ads = allAds().filter(a => {
+
+    const matchCategory =
+      !categoryFilter ||
+      a.category === categoryFilter;
+
+    const matchSearch =
+      (a.title + ' ' + a.city + ' ' + a.category)
+      .toLowerCase()
+      .includes(query);
+
+    return matchCategory && matchSearch;
   });
 
-  grid.innerHTML='';
+  grid.innerHTML = '';
 
-  ads.forEach(ad=>{
-    const card=document.createElement('article');
-    card.className='ad-card';
+  ads.forEach(ad => {
 
-    const photo=document.createElement('div');
-    photo.className='ad-photo';
+    const card = document.createElement('article');
+    card.className = 'ad-card';
 
-    if(ad.photo){
-      const img=document.createElement('img');
-      img.src=ad.photo;
-      img.alt=ad.title;
+    const photo = document.createElement('div');
+    photo.className = 'ad-photo';
+
+    if (ad.photo) {
+
+      const img = document.createElement('img');
+      img.src = ad.photo;
+      img.alt = ad.title;
+
       photo.appendChild(img);
-    }else{
-      photo.textContent=ad.symbol||'📦';
+
+    } else {
+      photo.textContent = ad.symbol || '📦';
     }
 
-    const info=document.createElement('div');
-    info.className='ad-info';
+    const info = document.createElement('div');
+    info.className = 'ad-info';
 
-    const title=document.createElement('div');
-    title.className='ad-title';
-    title.textContent=ad.title;
+    const title = document.createElement('div');
+    title.className = 'ad-title';
+    title.textContent = ad.title;
 
-    const price=document.createElement('div');
-    price.className='ad-price';
-    price.textContent=money(ad.price);
+    const price = document.createElement('div');
+    price.className = 'ad-price';
+    price.textContent = money(ad.price);
 
-    const city=document.createElement('div');
-    city.className='ad-city';
-    city.textContent='📍 '+ad.city;
+    const city = document.createElement('div');
+    city.className = 'ad-city';
+    city.textContent = '📍 ' + ad.city;
 
-    info.append(title,price,city);
-    card.append(photo,info);
+    info.append(title, price, city);
+    card.append(photo, info);
 
-    card.onclick=()=>showDetail(ad);
+    card.onclick = () => showDetail(ad);
+
     grid.appendChild(card);
   });
 
-  document.getElementById('emptyMsg').style.display=ads.length?'none':'block';
+  document.getElementById('emptyMsg').style.display =
+    ads.length ? 'none' : 'block';
 }
 
-function showDetail(ad){
-  const wrap=document.getElementById('detailContent');
-  wrap.innerHTML='';
+/* جزئیات آگهی */
 
-  const photo=document.createElement('div');
-  photo.className='detail-photo';
+function showDetail(ad) {
 
-  if(ad.photo){
-    const img=document.createElement('img');
-    img.src=ad.photo;
-    img.alt=ad.title;
+  const wrap = document.getElementById('detailContent');
+  wrap.innerHTML = '';
+
+  const photo = document.createElement('div');
+  photo.className = 'detail-photo';
+
+  if (ad.photo) {
+
+    const img = document.createElement('img');
+    img.src = ad.photo;
+    img.alt = ad.title;
+
     photo.appendChild(img);
-  }else{
-    photo.textContent=ad.symbol||'📦';
+
+  } else {
+    photo.textContent = ad.symbol || '📦';
   }
 
-  const title=document.createElement('h2');
-  title.textContent=ad.title;
+  const title = document.createElement('h2');
+  title.textContent = ad.title;
 
-  const price=document.createElement('h3');
-  price.className='ad-price';
-  price.textContent=money(ad.price);
+  const price = document.createElement('h3');
+  price.className = 'ad-price';
+  price.textContent = money(ad.price);
 
-  const city=document.createElement('p');
-  city.textContent='📍 '+ad.city;
+  const city = document.createElement('p');
+  city.textContent = '📍 ' + ad.city;
 
-  const desc=document.createElement('p');
-  desc.textContent=ad.description||'توضیحی ثبت نشده است.';
+  const desc = document.createElement('p');
+  desc.textContent =
+    ad.description || 'توضیحی ثبت نشده است.';
 
-  wrap.append(photo,title,price,city,desc);
+  wrap.append(photo, title, price, city, desc);
+
   showPage('detail');
 }
 
-function filterCategory(cat){
-  categoryFilter=cat;
-  document.getElementById('searchInput').value='';
-  document.getElementById('adsHeading').textContent='آگهی‌های '+cat;
+/* فیلتر دسته‌بندی */
+
+function filterCategory(cat) {
+
+  categoryFilter = cat;
+
+  document.getElementById('searchInput').value = '';
+
+  document.getElementById('adsHeading').textContent =
+    'آگهی‌های ' + cat;
+
   showPage('home');
   renderAds();
 }
 
-document.getElementById('postForm').addEventListener('submit',async e=>{
+/* ثبت آگهی */
+
+document.getElementById('postForm')
+.addEventListener('submit', async e => {
+
   e.preventDefault();
 
-  const file=document.getElementById('postPhoto').files[0];
-  let photo='';
+  const file =
+    document.getElementById('postPhoto').files[0];
 
-  if(file){
-    if(file.size>1400000){
+  let photo = '';
+
+  if (file) {
+
+    if (file.size > 1400000) {
       alert('عکس باید کوچک‌تر از ۱٫۴ مگابایت باشد.');
       return;
     }
-    photo=await new Promise(resolve=>{
-      const reader=new FileReader();
-      reader.onload=()=>resolve(reader.result);
+
+    photo = await new Promise(resolve => {
+
+      const reader = new FileReader();
+
+      reader.onload = () => resolve(reader.result);
+
       reader.readAsDataURL(file);
     });
   }
 
-  const ad={
-    id:String(Date.now()),
-    createdAt:Date.now(),
-    title:document.getElementById('postTitle').value.trim(),
-    category:document.getElementById('postCategory').value,
-    price:document.getElementById('postPrice').value,
-    city:document.getElementById('postCity').value.trim(),
-    description:document.getElementById('postDescription').value.trim(),
-    photo:photo
+  const ad = {
+
+    id: String(Date.now()),
+    createdAt: Date.now(),
+
+    title: document
+      .getElementById('postTitle').value.trim(),
+
+    category: document
+      .getElementById('postCategory').value,
+
+    price: document
+      .getElementById('postPrice').value,
+
+    city: document
+      .getElementById('postCity').value.trim(),
+
+    description: document
+      .getElementById('postDescription').value.trim(),
+
+    photo: photo
   };
 
-  try{
-    const ads=getAds();
+  try {
+
+    const ads = getAds();
+
     ads.unshift(ad);
-    localStorage.setItem('agahiland_ads',JSON.stringify(ads));
-  }catch(err){
+
+    localStorage.setItem(
+      'agahiland_ads',
+      JSON.stringify(ads)
+    );
+
+  } catch (err) {
+
     alert('فضای ذخیره‌سازی مرورگر کافی نیست.');
     return;
   }
 
   e.target.reset();
-  categoryFilter='';
+
+  categoryFilter = '';
+
+  document.getElementById('adsHeading').textContent =
+    'آگهی‌های ویژه';
+
   renderAds();
+
   showPage('home');
+
   alert('آگهی در همین مرورگر ذخیره شد.');
 });
 
+/* اجرای اولیه */
+
 renderAds();
+
 </script>
 
 </body>
-                                                            </html>
+      </html>
